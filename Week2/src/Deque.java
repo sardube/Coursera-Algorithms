@@ -1,13 +1,13 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Deque<Item> implements Iterable<Item>{
+public class Deque<Item> implements Iterable<Item> {
 
     private Node first;
     private Node last;
     private int count;
 
-    private class Node{
+    private class Node {
         Node next;
         Node prev;
         Item item;
@@ -22,21 +22,21 @@ public class Deque<Item> implements Iterable<Item>{
         }
     }
 
-    public Deque(){
+    public Deque() {
         this.first = null;
         this.last = null;
         this.count = 0;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size() == 0;
     }
 
-    public int size(){
+    public int size() {
         return count;
     }
 
-    public void addFirst(Item item){
+    public void addFirst(Item item) {
         validateItem(item);
         Node oldFirst = first;
         first = new Node();
@@ -45,26 +45,25 @@ public class Deque<Item> implements Iterable<Item>{
         first.prev = null;
 
 
-        if(isEmpty()){
+        if (isEmpty()) {
             last = first;
-        }
-        else{
+        } else {
             oldFirst.prev = first;
         }
         count++;
 
     }
 
-    public void addLast(Item item){
+    public void addLast(Item item) {
         validateItem(item);
 
-        Node oldLast =last;
+        Node oldLast = last;
         last = new Node();
         last.item = item;
         last.next = null;
         last.prev = oldLast;
-        if(isEmpty()) first = last;
-        else{
+        if (isEmpty()) first = last;
+        else {
             oldLast.next = last;
         }
         count++;
@@ -72,7 +71,7 @@ public class Deque<Item> implements Iterable<Item>{
 
     }
 
-    public Item removeFirst(){
+    public Item removeFirst() {
         validateNotEmpty();
         Node oldFirst = first;
         Item returnItem = oldFirst.item;
@@ -84,7 +83,7 @@ public class Deque<Item> implements Iterable<Item>{
 
     }
 
-    public Item removeLast(){
+    public Item removeLast() {
         validateNotEmpty();
 
         Node oldLast = last;
@@ -101,7 +100,7 @@ public class Deque<Item> implements Iterable<Item>{
         return new DequeIterator();
     }
 
-    private class DequeIterator implements Iterator<Item>{
+    private class DequeIterator implements Iterator<Item> {
         private Node current = first;
 
         @Override
@@ -111,26 +110,26 @@ public class Deque<Item> implements Iterable<Item>{
 
         @Override
         public Item next() {
-            if(!hasNext()) throw new NoSuchElementException("There are no more element");
+            if (!hasNext()) throw new NoSuchElementException("There are no more element");
             Item item = current.item;
             current = current.next;
             return item;
         }
 
-        public void remove(){
+        public void remove() {
             throw new UnsupportedOperationException("This operation is not supported by this class");
         }
     }
 
-    private void validateItem(Item item){
-        if(item == null) throw new IllegalArgumentException("The item can't be null");
+    private void validateItem(Item item) {
+        if (item == null) throw new IllegalArgumentException("The item can't be null");
     }
 
-    private void validateNotEmpty(){
-        if(isEmpty()) throw new NoSuchElementException("The deque is empty");
+    private void validateNotEmpty() {
+        if (isEmpty()) throw new NoSuchElementException("The deque is empty");
     }
 
-    public static void main(String args[]){
+    public static void main(String[] args) {
         Deque<Integer> deck = new Deque<Integer>();
 
         System.out.println("IS EMPTY: " + deck.isEmpty());

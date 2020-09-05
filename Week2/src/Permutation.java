@@ -11,11 +11,11 @@ public class Permutation {
         int k = Integer.parseInt(args[0]);
         RandomizedQueue<String> randQueue = new RandomizedQueue<String>();
 
-        while(!StdIn.isEmpty()){
+        while (!StdIn.isEmpty()) {
             String s = StdIn.readString();
             randQueue.enqueue(s);
         }
-        for(int i = 0 ; i<k;i++){
+        for (int i = 0; i < k; i++) {
             StdOut.println(randQueue.dequeue());
         }
 
